@@ -1,0 +1,59 @@
+<%= render 'shared_css_js/css_js' %>
+<p class="contextual"><%= link_to_leave_dash_board %> | <%=  link_to_go_back %></p><br>
+<h3> <%= l(:heading_category)%></h3>
+
+<% unless @subjects.blank? %>
+  <p>
+    <%# since we are using redmine's context menu, and its redmine's way of creating the context menus.%>
+    <%= form_tag({}) do %>
+	    <table class="list issues text-center">
+	      <thead>
+		    	<tr>
+	        	<th class="checkbox hide-when-print">
+            	<%= link_to image_tag('toggle_check.png'), {},
+                                  :onclick => 'toggleIssuesSelection(this); return false;',
+                                  :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}" %>
+          	</th>		  
+			    	<th><%= l(:label_category)%></th>
+		    	</tr>
+	      </thead>
+	      <tbody>
+			    <% @subjects.each do |subject| %>
+				    <tr class="<%= cycle('even', 'odd') -%> hascontextmenu issue">
+			        <td> <%= check_box_tag "selected_subjects[]", subject.id, false %> </td>
+					    <td> <%=subject.subject%> </td>
+				    </tr>
+			    <% end %>
+	      </tbody>
+	    </table>
+    <% end %>
+  </p>
+<%else%>
+  <p><%=l(:message_category_not_added)%></p>
+<% end %>
+
+<%= form_for :subject, url:  systango_hrm_subjects_path do |f| %>
+	<div class="box tabular">
+	  <% if @subject and !@subject.errors.blank? %>
+		  <div id="errorExplanation">
+			  <ul>
+				  <% @subject.errors.messages.values.each do |message| %>
+	      		<% message.each do |msg| %>
+							<li><%= msg %></li>
+						<%end %>
+				  <% end %>
+			  </ul>
+		  </div>
+	  <% end %>
+	  <h3><%= l(:heading_category_add)%></h3>
+	  <p>
+	    <%= f.label(:category) do  %>
+	    	Category <font color="red">*</font>
+    	<%end%>
+	    <%= f.text_field :subject,:size => 20 %>
+		</p>
+	</div>	    
+	<%= f.submit l(:submit_form), :class => "left" %>
+<% end %>
+ <p class="contextual"><%= link_to_go_back %></p>
+<%= context_menu url_for( {:controller => "systango_hrm_subjects", :action => "context_menu"} )%>

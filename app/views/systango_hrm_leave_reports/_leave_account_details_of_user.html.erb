@@ -1,0 +1,22 @@
+<table class="list issues text-center">
+  <thead>
+	  <tr>
+		  <th><%= l(:label_leave_entitled)%></th>
+		  <th><%= l(:label_leave_applicable)%></th>
+		  <th><%= l(:label_leave_taken)%></th>
+		  <th><%= l(:label_leave_balance)%></th>
+		  <th><%= l(:label_maternity_leave)%></th>
+		  <th><%= l(:label_total_comp_offs_given)%></th>
+	  </tr>
+	</thead>
+	<tbody>	  
+	  <tr class="<%= 'even' -%> issue">
+	    <td><%= @leave_account.leave_summary_current_year.leaves_entitled rescue nil %></td>
+		  <td><%= @leave_account.user.systango_hrm_designation_histories.order_by_id_desc.first.applicable_from.strftime("%b %d, %y") rescue nil %></td>
+		  <td><%= @leave_account.leave_summary_current_year.leaves_taken  rescue nil %></td>
+		  <td><%= @leave_account.leave_reamianing %></td>
+		  <td><%= @leave_account.maternity_leave %></td>
+		  <td><%= @leave_account.leave_summary_current_year.total_comp_off_provided rescue nil %></td>
+	  </tr>
+	</tbody>  
+</table>

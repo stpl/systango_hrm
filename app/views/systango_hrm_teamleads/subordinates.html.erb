@@ -1,0 +1,95 @@
+<%= render 'shared_css_js/css_js' %>
+<p class="contextual">
+  <%= link_to_leave_dash_board %> | <%=  link_to_go_back %>
+</p>
+<h3><%=l(:label_add_approvres_of_leave)%></h3>
+<%= form_for :teamlead_subordinate, url: teamleads_show_path do |f|%>
+  <div class="box tabular">
+	  <%= f.hidden_field :teamlead_id, :value => params[:teamlead_user_id] %>
+    <p class="select_position">
+       <%= f.label(:team_Lead_name) do%>
+        Approver <font color="red">*</font>
+      <%end%>
+      <% unless @employees.blank? %>
+       <%= select_tag "teamlead_user_id", options_from_collection_for_select(@employees, "id", "name", params["teamlead_user_id"]), include_blank: true, id: "teamlead_user_id",class: "select_width", :onchange => "this.form.submit(); return false;" %>
+      <% else %>
+        <%= l(:no_teamlead_added_message) %>
+      <% end %>
+    </p>
+  </div>
+<% end %>
+
+<%= form_for :teamlead_subordinate, url: teamleads_update_path do |f|%>
+	<%= f.hidden_field :teamlead_id, :value => params[:teamlead_user_id] %>
+  <% unless @teamlead.blank? %>
+    <% if @user_not_have_manage_leaves_permission %>
+      <h4>
+        <u><%= @teamlead.name%></u>
+        <%= l(:error_user_not_have_manage_leaves_permissoin)%>
+      </h4>
+      <% if User.current.admin %>
+      	<p> 
+      		<%= l(:label_if_you_are_admin) %> <%= link_to "here..", edit_user_path(@teamlead.id, :tab => 'memberships') %> 
+    		</p>
+      <% else %>
+	      <p>
+	      	<%= l(:label_please_ask_admin_to_add_permission) %>
+	      </p>
+      <% end %>
+    <%else%>
+	    <div class="splitcontentleft" id = 'tab-content-members'>
+        <% unless @subordinates.blank? %>
+          <p>
+            <fieldset>
+              <legend>
+                <b>
+                  <u><%= @teamlead.name %></u>
+                  <%= l(:label_leave_approver_of) %>
+                </b>
+              </legend>	      
+	          	<p> <%= l(:label_message_to_select_subordinate) %> </p>
+	            <p>
+                <%= label_tag "subordinate_search", l(:label_principal_search) %><%= text_field_tag 'principal_search', nil %>
+              </p>
+              <%=javascript_tag "observeSearchfield('principal_search', 'principals_subordinates', '#{ escape_javascript teamleads_show_autocomplete_subordinate_path(params[:teamlead_user_id])}')" %>  
+            	<div id="principals_subordinates">
+              	<%= principals_check_box_tags 'subordinate[user_ids][]', @subordinates %>
+            	</div>
+            </fieldset>
+          </p>
+	        <p>
+	          <%= f.submit l(:button_remove_subordinate), :name => 'remove'%>
+          </p>
+        <% end %>
+      </div>  
+	    <div class="splitcontentright" id = 'tab-content-members'>
+        <% unless @non_subordinates.blank? %>
+          <p>
+            <fieldset>
+              <legend>
+                <b>
+                  <%= l(:label_aprrover_for)%>
+                  <u><%= @teamlead.name %></u>
+                </b>
+              </legend>
+            <p> <%= l(:label_message_to_add_subordinate) %> </p>
+	          <p><%= label_tag "non_subordinate_search", l(:label_principal_search) %><%= text_field_tag 'user_search', nil %></p>
+            <%=javascript_tag "observeSearchfield('user_search', 'principals', '#{ escape_javascript teamleads_show_autocomplete_path(params[:teamlead_user_id])}')" %>  
+            <div id="principals">
+              <%= principals_check_box_tags 'non_subordinate[user_ids][]', @non_subordinates %>
+            </div>
+            </fieldset>
+          </p>
+          <p>
+	          <%= f.submit l(:button_add_subordinate), :name => 'add'%>
+          </p>
+    	  <% end %>
+      </div>
+	  <% end %>
+	<% end %>
+<% end %>
+
+<div class="clearfix"></div>
+<div class="splitcontentright">
+  <p id='with-clearfix' class="clearfix contextual"><%=  link_to_go_back %></p>
+</div>

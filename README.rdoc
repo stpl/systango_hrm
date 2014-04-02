@@ -1,0 +1,29 @@
+= Systango Hrm plugin
+
+== Install
+
+* Copy systango_hrm plugin to {RAILS_APP}/plugins on your redmine path
+* Run bundle install --without development test RAILS_ENV=production
+* Run rake redmine:plugins NAME=systango_hrm RAILS_ENV=production
+* Run nohup rake jobs:work &
+* Run rake task for 'send reminder email for pending leaves' and 'recalculate leaves on holiday calender update'
+
+== Uninstall
+
+rake redmine:plugins NAME=systango_hrm RAILS_ENV=production
+rm -r plugins/systango_hrm
+
+== Requirements
+
+* Redmine 2.2.4.stable and above
+
+== Test
+rake db:drop RAILS_ENV=test
+rake db:migrate redmine:plugins:migrate RAILS_ENV=test
+rake redmine:test:plugins:functionals PLUGIN=systango_hrm RAILS_ENV=test
+rake redmine:test:plugins:units PLUGIN=systango_hrm RAILS_ENV=test
+rake redmine:test:plugins PLUGIN=systango_hrm RAILS_ENV=test
+
+rake db:reset  redmine:plugins:migrate test:plugins NAME=systango_hrm RAILS_ENV=test
+
+rake db:drop RAILS_ENV=test && rake db:create db:migrate redmine:plugins:migrate RAILS_ENV=test && rake test:plugins PLUGIN=systango_hrm RAILS_ENV=test

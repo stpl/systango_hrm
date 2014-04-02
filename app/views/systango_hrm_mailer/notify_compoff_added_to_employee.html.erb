@@ -1,0 +1,5 @@
+<p>Hello <%= @leave_account.user.name.titleize rescue nil %>,</p>
+
+<p>Comp-off added for: <u><%= @compoff.to_f %></u> days</p>
+
+<p>Your total Comp-off is : <u><%= @leave_account.total_comp_off_provided %></u></p>

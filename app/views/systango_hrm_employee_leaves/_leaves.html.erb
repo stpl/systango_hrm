@@ -1,0 +1,129 @@
+<%= form_for @employee_leave do |f| %>
+	<div class="box tabular">  
+		<% unless @employee_leave.errors.blank? %>
+	 		<p>
+	 			<div id="errorExplanation">
+			 		<ul>
+				 		<% @employee_leave.errors.messages.values.each do |message| %>
+		      		<% message.each do |msg| %>
+								<li><%= msg %></li>
+							<%end %>
+						<% end %>
+			 		</ul>
+			 	</div>
+		 	</p>
+		<%end%>
+		<% if @employee_leave.id? and @employee_leave.referral_id? %>
+			<p>
+			  <%= f.label(:leave_type) do  %>
+			    Leave type<font color="red">*</font>
+		    <%end%>
+				<span id="watchers_inputs"> 
+					<label class="floating"> 
+						<%= radio_button 'apply', 'leave', 'refer', :checked => (true) %>
+						<%=l(:label_referred)%>
+					</label>
+				</span>
+			</p>
+			<%= f.hidden_field  :user_id, :value => @employee_leave.user_id %>
+			<%= f.hidden_field  :referral_id, :value => @employee_leave.referral_id %>
+		<% else %>  
+			<p>
+				<%= f.label(:leave_type) do  %>
+					Select leave type <font color="red">*</font>
+				<%end%>
+			 	<span id="watchers_inputs"> 
+					<label class="floating"> 
+				 		<%= radio_button 'apply', 'leave', 'self', {:class => "relat__atu relat__atu_no", :checked => (true if @employee_leave.referral_id.blank? or params[:apply][:leave]== 'self' rescue nil)} %>
+						<%= l(:label_self)%>
+					</label>
+					<label class="floating">
+						<%= radio_button 'apply', 'leave', 'refer', {:class => "relat__atu relat__atu_yes", :checked => (true if !@employee_leave.referral_id.blank? or (params[:apply] and params[:apply][:leave] == 'refer' rescue nil))} %>
+						<%= l(:label_referral) %>
+					</label>
+			 	</span>
+			</p>
+			<p id="referral_apply" style="display:none">
+				<% if @subordinates_with_leave_account.blank? %>
+					<%= l(:message_for_no_subordinate) %>
+				<% else %>
+					<%= f.label(:referrals) do %>
+						Select referrals name <font color="red">*</font>
+					<%end%>
+					<%= f.select(:referral_id, @subordinates_with_leave_account.collect{|p| [p.name, p.id]}, {:prompt =>  l(:prompt_to_select),:selected => (params[:systango_hrm_employee_leave][:referral_id] rescue nil)}) %>
+				<% end %>
+			</p>
+		<% end %> 
+		<p>
+			<%= f.label :half_day, l(:label_for_half_day)%> <%= f.check_box :is_half_day, :id => 'half_day', :checked => (@employee_leave.is_half_day or params[:systango_hrm_employee_leave][:is_half_day] == "1"  rescue nil)%>
+		</p>
+		<% if @leave_account.is_eligible_for_maternity_leave %>
+			<p id="maternity_leave">
+				<%= f.label :maternity_leave, l(:label_for_maternity_leave) %> <%= f.check_box :is_maternity_leave, :id => 'maternity_leave', :checked => ( @employee_leave.is_maternity_leave or params[:systango_hrm_employee_leave][:is_maternity_leave] == "1" rescue nil) %>
+			</p>
+		<% end %>
+		<p>
+			<%= f.label(:leave_start_date) do  %>
+				Leave start date <font color="red">*</font>
+			<%end%>	
+			<%= f.text_field :leave_start_date, :size => 10, :value => (@employee_leave.leave_start_date or params[:systango_hrm_employee_leave][:leave_start_date] rescue nil) %>
+		</p>
+		<p>
+			<%= f.label(:leave_end_date) do  %>
+				Leave end date <font color="red">*</font>
+			<%end%>
+			<%= f.text_field :leave_end_date, :size => 10, :value => (@employee_leave.leave_end_date or params[:systango_hrm_employee_leave][:leave_end_date] rescue nil) %>
+		</p>
+		<p>
+			<%= f.label(:category) do  %>
+				Category <font color="red">*</font>
+			<%end%>	
+			<%= f.select(:subject_id,options_from_collection_for_select(@subjects, "id", "subject", :selected => (@employee_leave.subject_id or params[:systango_hrm_employee_leave][:subject_id] rescue nil)),  id: "subject_id" ,:prompt => l(:prompt_to_select)) %>
+		</p>
+		<p>
+			<%= f.label(:remarks) do  %>
+				Remarks <font color="red">*</font>
+			<%end%>
+			<%= f.text_area :remark, :id => "message_area", :class =>"wiki-edit", :cols => 19, :rows => 5, :value => (@employee_leave.remark or params[:systango_hrm_employee_leave][:remark] rescue nil) %>
+		</p>
+		<p>
+			<label> 
+				<b><%= l(:label_for_default_application)%></b>
+			</label>
+			<span id="watchers_inputs">
+				<% unless @default_application_receivers.blank? %>
+					<% @default_application_receivers.each do |user| %>        
+							<label class="floating"><%= check_box_tag 'users_id[]', user.id, true, :disabled => true %>
+								<%= user.name %>      
+							</label>    
+					<% end %>
+				<% end %>
+			</span>
+		</p>
+		<%if !@users_with_hr_permission.blank? and @users_with_hr_permission.include?(User.current.id) %>
+			<div id="show_hr_if_referral" style="height:20px;">
+				<p>
+					<%= check_box_tag 'users_id[]', User.current.id, true, :disabled => true  %>
+					<%= User.current.name %>
+				</p>
+			</div>
+		<% end %>
+		<% unless @teamlead_details.blank? %>
+			<p>
+				<%= f.label(:select_employee_name) do %>
+					Add more leave approvers
+					<span id='with-clearfix' class='clearfix add_attachment'>
+						(Select more than one name by pressing Ctrl Key)
+					</span>
+				<%end%>
+				<span class="select_width">
+					<%= collection_select(:receiver_id, :id, @teamlead_details, :id, :name,{},  {:multiple => true, :size => 5})%>
+				</span>
+			</p>
+		<% end %>
+	</div>    
+	<p>
+		<%= f.submit l(:button_submit_continue), :name => 'continue', :class=>"left" %>
+		<%= f.submit(l(:button_submit_view), :name => 'view', :class => "left") unless @employee_leave.id? and @employee_leave.referral_id? %>
+	</p>
+<% end %>

@@ -1,0 +1,36 @@
+<%= render 'shared_css_js/css_js' %>
+<p class="contextual">
+	<%= link_to_leave_dash_board %> | <%= link_to_go_back %>
+</p>
+<h3><%= l(:heading_update_entitled_leaves) %></h3>
+<%= form_for :designation, url: systango_hrm_designation_path(@designation), method: :put do |f| %>
+	<div class="box tabular">
+		<% if @designation and !@designation.errors.blank? %>
+			<div id="errorExplanation">
+				<ul>
+					<% @designation.errors.messages.values.each do |message| %>
+	      		<% message.each do |msg| %>
+							<li><%= msg %></li>
+						<%end %>
+					<% end %>
+			  </ul>
+	    </div>
+		<% end %>
+
+	  <%= f.hidden_field :id, :value => @designation.id %>
+		<p>
+			<%= f.label(:designation)  do  %>
+				Designation <font color="red">*</font>
+			<%end%>
+		  <%=f.text_field :designation, :value=>@designation.designation,:size=>20%>
+		</p>
+		<p>
+			<%= f.label(:entitled_leaves) do  %>
+				Entitled leaves <font color="red">*</font>
+			<%end%>
+		  <%= f.text_field :leaves_entitled, :value => @designation.leaves_entitled , :size => 20 %>
+		</p>
+	</div>			
+	<%= f.submit l(:button_update),:class=>"left"%>
+<%end%>
+<p class="contextual"><%= link_to_go_back %></p>

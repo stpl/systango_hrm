@@ -1,0 +1,11 @@
+<h4><u><%= @current_user.name.titleize %></u> has updated the leave application of: </h4>
+
+<%= render :partial => "leave_detail", :locals => { :leave => @leave_application } %>
+
+<p>
+<%= @current_user.name.titleize %> changed the status to: <u><%= @new_status %></u>
+</p>
+
+<p> and added the comment: <b><%= @changed_status.comment %></b></p>
+
+<p>To view, please visit: <%= url_for application_systango_hrm_employee_leafe_url(@leave_application.id) %></p>

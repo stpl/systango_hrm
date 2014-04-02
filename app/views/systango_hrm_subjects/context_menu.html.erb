@@ -1,0 +1,8 @@
+<ul>
+  <%= call_hook(:view_subjects_context_menu_start, {:subjects => @subjects, :can => @can, :back => @back }) %>
+
+  <% if !@subject.nil? and @subjects.size == 1 %>
+	  <li><%= context_menu_link 'Edit', edit_systango_hrm_subject_path(@subject.id),:class => 'icon-edit', :disabled => !@can[:edit] %></li>
+	<%end%>
+  <%= call_hook(:view_subjects_context_menu_end, {:subjects => @subjects, :can => @can, :back => @back }) %>
+</ul>

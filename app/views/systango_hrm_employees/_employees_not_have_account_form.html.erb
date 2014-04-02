@@ -1,0 +1,41 @@
+<%= form_for :record, url: employees_create_leave_account_path do |f|%>
+  <div class="box tabular">
+    <%if @leave_account and !@leave_account.errors.blank?%>
+      <div id="errorExplanation">
+        <ul>
+          <% @leave_account.errors.messages.values.each do |message| %>
+              <% message.each do |msg| %>
+                <li><%= msg %></li>
+              <%end %>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <p>
+      <%= f.label(:select_employee_name) do  %>
+        Select Employee <font color="red">*</font><span id='with-clearfix' class='clearfix add_attachment'>(Select more than one name by pressing Ctrl Key)</span> 
+      <%end%>
+      <span class="select_width"><%= f.select :user_id, options_for_select((@users_not_having_leave_account.order_by_firstname_asc.map{|b|[b.name, b.id]})), {}, {:multiple => true, :size => 7 } %></span>
+    </p>
+    <p><%= f.label :maternity_leave, "Eligible For Maternity Leaves"%>  <%= f.check_box :maternity_leave, :checked => (params[:record][:maternity_leave] == "1" rescue nil)%></p>
+    <p class="select_position">
+      <%= f.label(:designation) do  %>
+        Designation <font color="red">*</font>
+      <%end%>
+      <%= select_tag "designation_id", options_from_collection_for_select(@designations, "id", "designation", params["designation_id"]), include_blank: true, id: "designation_id" ,class: "select_width"%>
+    </p>
+    <p>
+      <%= f.label(:date_of_joining) do  %> 
+        Applicable From <font color="red"> *</font>
+      <%end%>
+      <%= f.text_field :date_of_joining, :size => 10, :value => (params[:record][:date_of_joining] rescue nil)%>
+    </p>
+    <p>
+      <%= f.label(:remark) do  %>
+        Remark <font color="red"> *</font>
+      <%end%>
+      <%= f.text_area :remarks, :id => "message_area", :cols => 80, :rows => 3,:class=>"wiki-edit" ,:value =>((params[:record][:remarks]) rescue nil) %>
+    </p>
+  </div>
+  <%= f.submit l(:submit_form)%>
+<%end%>

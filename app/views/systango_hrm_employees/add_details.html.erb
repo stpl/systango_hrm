@@ -1,0 +1,34 @@
+<%= render 'shared_css_js/css_js' %>
+<p class="contextual">
+	<%= link_to_leave_dash_board %> | <%= link_to_go_back %>
+</p>
+<h3><%= l(:heading_add_update_employee_leaves) %></h3>
+<div class="box tabular">
+  <p>
+	  <%= form_for :record do |f| %>
+		  <div id="watchers_inputs">
+			  <label class="floating">					
+				  <%=f.radio_button :employee, 'have_account',{:checked => params[:record].blank?} %>
+				  <b><%= l(:label_users_have_leave_account) %></b>
+			  </label>
+			  <label class="floating">					
+				  <%= f.radio_button :employee, 'not_have_account',{:checked => !params[:record].blank?}%>
+				  <b><%=l(:label_users_have_no_leave_account)%></b>			
+			  </label>
+		  </div>
+		<% end %>
+	</p>
+</div>
+
+<div id="have_account">
+	<p>
+    <%= will_paginate @users_having_leave_account %>
+    <%= render :partial => "systango_hrm_employees/employees_having_account_grid", :locals => { :details => @users_having_leave_account} %>
+	</p>
+</div>
+
+<div id="not_have_account">
+  <%= render :partial => "systango_hrm_employees/employees_not_have_account_form" %>
+</div>
+	<p class="contextual"><%= link_to_go_back %></p>
+<%= context_menu url_for( {:controller => "systango_hrm_employees", :action => "context_menu"} )%>

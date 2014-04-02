@@ -1,0 +1,7 @@
+<h4><u><%= @user.name.titleize %></u> has updated the status of the application</h4>
+
+<%= render :partial => "leave_detail", :locals => { :leave => @leave_details } %>
+
+<p><%= @user.name.titleize %> changed the status to: <u><%= @changed_status.receiver_approval_status %></u> and added the comment: <b><%= @changed_status.comment %></b><p>
+
+<p>To approve/unapprove, please visit: <%= url_for application_systango_hrm_employee_leafe_url(@leave_details.id) %></p>

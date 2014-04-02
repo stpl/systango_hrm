@@ -1,0 +1,44 @@
+<p>
+  <h4>
+  	<b>
+			<%= l(:label_promotion_for) %>
+  		<u><%= leave_account.user.name %></u>
+		 </b>
+  </h4>
+  <%= form_for :designation_history, url: systango_hrm_designation_history_path, method: :put do |f| %>
+	  <div class="box tabular">
+		  <% if designation_history and !designation_history.errors.blank? %>
+			  <div id="errorExplanation">
+				  <ul>
+					  <% designation_history.errors.messages.values.each do |message| %>
+		      		<% message.each do |msg| %>
+								<li><%= msg %></li>
+							<%end %>
+					  <% end %>
+				  </ul>
+			  </div>
+		  <% end %>
+
+		  <p class="select_position">
+		    <%= f.label(:designation) do  %>
+    			Designation <font color="red">*</font>
+    		<%end%>
+		    <%= select_tag "designation_id", options_from_collection_for_select(designations, "id", "designation", (designation_history.new_designation_id rescue nil)), id: "designation_id" ,class: "select_width"%>
+	    </p>
+	    <p>
+		    <%= f.label(:applicable_from) do  %>
+		    	 Applicable from <font color="red"> *</font> 
+	    	<%end%> 
+		    <%= f.text_field :applicable_from, :size => 10, :value => (designation_history.applicable_from rescue nil) %>
+		  </p>
+		  <p>
+		    <%= f.label(:remarks) do  %>
+		    	Remark <font color="red"> *</font>
+	    	<%end%>
+        <%= f.text_area :remarks, :id => "message_area", :cols => 80, :rows => 3,:class=>"wiki-edit" ,:value => (designation_history.remarks rescue nil) %>
+      </p>
+  	</div>
+  	<%= f.submit l(:button_update),:class=> "left" %>
+  <% end %>
+  <div id='with-clearfix' class='clearfix'></div>
+</p>

@@ -1,0 +1,35 @@
+<% if leaves %>
+<% custom_field = CustomField.employee_code_custom_field %>
+  <table class="list issues text-center">
+    <thead>
+		  <tr>
+	  	  <%= "<th>#{l(:label_user)}</th>".html_safe unless @self %>
+		  	<%= "<th>#{l(:label_employee_code)}</th>".html_safe unless custom_field.blank? or custom_value? or @self %>
+	  	  <th><%= l(:label_referred) %></th>
+		  	<th><%= l(:label_leave_type) %></th>
+	  	  <th><%= l(:label_apply_leave)%></th>
+		  	<th><%= l(:label_leave_start)%></th>
+		  	<th><%= l(:label_leave_end)%></th>
+		  	<th><%= l(:label_category)%></th>
+		  	<%= "<th>#{l(:label_for_status)}</th>".html_safe unless params[:action]=="manage_request" %>
+		  </tr>
+    </thead>
+    <tbody>
+		  <% leaves.each do |leave| %>
+				<tr class="<%= cycle('even', 'odd') -%> issue">
+					<% unless @self %>
+		    		<td><%= leave.referral_id.nil? ? leave.user.name : User.find(leave.referral_id).name rescue nil %></td>
+	  				<%= "<td>#{CustomValue.value_employee_code(leave.applied_user).value rescue nil}</td>".html_safe unless custom_field.blank? or custom_value? %>
+		    	<% end %>
+	       	<td><%= apply_type(leave)%></td>
+	       	<td><%= leave.leave_type%></td>
+					<td><%= leave.created_at.strftime("%b %d, %y") rescue nil %></td>
+					<td><%= leave_date_format(leave, 'start_date') %></td>
+					<td><%= leave_date_format(leave, 'end_date') %></td>
+					<td><%= link_to leave.systango_hrm_subject.subject.truncate(10), application_systango_hrm_employee_leafe_path(leave.id) %></td>
+					<%= "<td>#{leave.status.capitalize}</td>".html_safe unless params[:action]=="manage_request" %>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>

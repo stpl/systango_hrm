@@ -1,0 +1,27 @@
+leave_account_1:
+  id: 1
+  user_id: 1
+  current_designation_id: 1
+  date_of_joining: 2014-01-01
+  is_eligible_for_maternity_leave: 0
+  
+leave_account_2:
+  id: 2
+  user_id: 2
+  current_designation_id: 2
+  date_of_joining: 2014-01-01
+  is_eligible_for_maternity_leave: 1
+  
+leave_account_3:
+  id: 3
+  user_id: 3
+  current_designation_id: 2
+  date_of_joining: 2014-01-01
+  is_eligible_for_maternity_leave: 0
+
+leave_account_4:
+  id: 4
+  user_id: 4
+  current_designation_id: 1
+  date_of_joining: 2014-01-01
+  is_eligible_for_maternity_leave: 0

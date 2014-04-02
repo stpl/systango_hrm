@@ -1,0 +1,28 @@
+<%= render 'shared_css_js/css_js' %>
+<p class="contextual">
+	<%= link_to_leave_dash_board %> | <%= link_to_go_back %>
+</p>
+<h3><%= l(:heading_holiday_calender) %> <%= Time.now.strftime("%Y") %></h3>
+<% unless @holidays.blank? %>
+	<table class="list issues text-center">
+	 <thead>
+			<tr>
+				<th><%= l(:label_holiday)%></th>
+				<th><%= l(:label_date)%></th>
+				<th><%= l(:label_weekday)%></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @holidays.each do |holiday| %>
+				<tr class="<%= cycle('even', 'odd') -%> issue">
+				  <td> <%=holiday.holiday_for%> </td>
+				  <td> <%=holiday.holiday_date.strftime("%B %d, %Y") rescue nil%> </td>
+			    <td> <%=holiday.holiday_date.strftime("%A") rescue nil%> </td>
+ 			  </tr>
+			<% end %>
+		</tbody>	
+	</table>
+<%else%>
+  <p><%= l(:message_calender_not_added_yet) %></p>
+<%end%>
+<p class="contextual"><%= link_to_go_back %></p>

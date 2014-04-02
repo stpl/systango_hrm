@@ -1,0 +1,9 @@
+<%= render 'shared_css_js/css_js' %>
+<p class="contextual">
+	<%= link_to_leave_dash_board %> | <%= link_to_go_back %>
+</p>
+<h3><%= l(:heading_for_manage_requests)%></h3>
+
+<%= render :partial => "systango_hrm_leave_reports/all_leaves_report"%>
+
+<p class="contextual"><%= link_to_go_back %></p>

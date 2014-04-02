@@ -1,0 +1,17 @@
+<%= render 'shared_css_js/css_js' %>
+<% unless @leave_account.blank? %>
+ <p class="contextual">
+   <%= link_to_leave_dash_board %> | <%= link_to_go_back %>
+ </p>
+<%end%>
+
+<%= javascript_include_tag "apply_leave#{('_tl' if User.current.admin_user?)}", :plugin => 'systango_hrm' %>
+<% unless @leave_account.blank? %>
+ 	<% if @leave_account.date_of_joining > Date.current %>
+		<h3><%= l(:message_for_leave_account_activation)%><%= @leave_account.date_of_joining %></h3>
+ 	<% else %>
+ 		<h3><%= l(:heading_apply_leave)%></h3>
+   		<%= render 'leaves'%>
+ 	<%end%>
+<% end %>
+<p class="contextual"><%= link_to_go_back %></p>

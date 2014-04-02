@@ -1,0 +1,15 @@
+designation_1:
+    id: 1
+    designation: Level01
+    leaves_entitled: 16
+
+designation_2:
+    id: 2
+    designation: Level02
+    leaves_entitled: 18
+
+designation_3:
+    id: 3
+    designation: Level03
+    leaves_entitled: 20
+

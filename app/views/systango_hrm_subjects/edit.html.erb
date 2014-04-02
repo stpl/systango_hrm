@@ -1,0 +1,16 @@
+<p class="contextual"><%= link_to_leave_dash_board %> | <%= link_to_go_back %></p>
+<h3> <%= l(:heading_update_category) %> </h3>
+<%= form_for :subject, url:  systango_hrm_subject_path(@subject), method: :put do |f| %>
+	<div class="box tabular">
+		<%= error_messages_for 'subject' %>
+		<%= f.hidden_field :id, :value => @subject.id %>
+		<p>
+	    <%= f.label(:category) do  %>
+	      Category <font color="red">*</font> 
+      	<%end%>
+	    <%= f.text_field :subject,:size => 20 %>
+	 </p>
+	</div>
+  <%= f.submit l(:button_update),:class=> "left" %>
+<% end %>
+<p class="contextual"><%= link_to_go_back %></a></p>

@@ -1,0 +1,27 @@
+<p>
+  <h4>
+    <b><%= l(:heading_designation_details_for) %>
+       <u><%= designation_histories.first.user.name %></u>
+     </b>
+  </h4>
+  <table class="list issues text-center">
+    <thead>
+      <tr>
+		    <th><%= l(:label_previous_designation) %></th>
+		    <th><%= l(:label_new_designation) %></th>
+		    <th><%= l(:label_leave_applicable_from) %></th>
+		    <th><%= l(:label_remarks) %></th>
+	    </tr>
+    </thead>
+    <tbody>
+      <% designation_histories.reverse.each do |designation_history| %>				
+  	    <tr class="<%= cycle('even', 'odd') -%> issue">
+          <td> <%= designation_history.prev_designation.designation rescue nil %></td>
+  		    <td> <%= designation_history.new_designation.designation rescue nil %></td>
+  		    <td> <%= designation_history.applicable_from %> </td>
+  		    <td> <%= designation_history.remarks %></td>
+  	    </tr>
+      <% end %>
+    </tbody>
+  </table>
+</p>

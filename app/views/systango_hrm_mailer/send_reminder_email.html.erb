@@ -1,0 +1,5 @@
+<p>This leave is pending for your approval/unapproval.</p>
+
+<p><%= @leave.applied_user.name.titleize rescue nil %> has applied leave for <%= @leave.systango_hrm_subject.subject %></p>
+
+<%= render :partial => "leave_request", :locals => { :leave => @leave } %>

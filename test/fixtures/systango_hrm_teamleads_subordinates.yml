@@ -1,0 +1,14 @@
+teamlead_subrodinates_1:
+  id: 1
+  teamlead_user_id: 1
+  subordinate_user_id: 2
+  
+teamlead_subrodinates_2:
+  id: 2
+  teamlead_user_id: 1
+  subordinate_user_id: 3
+  
+teamlead_subrodinates_3:
+  id: 3
+  teamlead_user_id: 2
+  subordinate_user_id: 3

@@ -1,0 +1,8 @@
+<ul>
+  <%= call_hook(:view_holidays_context_menu_start, {:holidays => @holidays, :can => @can, :back => @back }) %>
+
+  <% if !@holiday.nil? and @holidays.size == 1 %>
+	  <li><%= context_menu_link 'Edit', edit_systango_hrm_holiday_path(@holiday.id),:class => 'icon-edit', :disabled => !@can[:edit] %></li>
+  <%end%>
+  <%= call_hook(:view_holidays_context_menu_end, {:holidays => @holidays, :can => @can, :back => @back }) %>
+</ul>

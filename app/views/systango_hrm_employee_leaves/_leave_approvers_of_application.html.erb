@@ -1,0 +1,18 @@
+<table class="list issues text-center">
+	<thead>
+		<tr>
+		  <th><%=l(:label_name)%></th>
+		  <th><%=l(:label_status)%></th>
+		  <th><%=l(:label_comment)%></th>
+		</tr>
+  </thead>	
+  <tbody>
+		<% @request_recievers_for_leave.each do |request_reciever| %>
+		  <tr class="<%= cycle('even', 'odd') -%> issue">
+			<td> <%= request_reciever.user.name rescue nil %></td>
+			<td> <%= request_reciever.receiver_approval_status.capitalize %> </td>
+			<td> <%= request_reciever.comment %> </td>
+		  </tr>
+		<% end %>
+	</tbody>
+</table>

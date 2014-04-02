@@ -1,0 +1,72 @@
+<%= render 'shared_css_js/css_js' %>
+<p class="contextual">
+	<%= link_to_leave_dash_board %> | <%=  link_to_go_back %>
+</p>
+<h3> <%= l(:heading_holiday_calender) %> <%= Time.now.strftime("%Y") %> </h3>
+<%  unless @holidays.blank? %>
+  <%# since we are using redmine's context menu, and its redmine's way of creating the context menus.%>
+  <%= form_tag({}) do %>
+	  <table class="list issues text-center">
+	    <thead>
+		    <tr>
+		      <th class="checkbox hide-when-print">
+			      <%= link_to image_tag('toggle_check.png'), {},
+                                  :onclick => 'toggleIssuesSelection(this); return false;',
+                                  :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}" %>
+          </th>		    
+				  <th><%= l(:label_holiday)%></th>
+	    		<th><%= l(:label_date)%></th>
+	    		<th><%= l(:label_weekday)%></th>
+	    	</tr>
+	    </thead>
+	    <tbody>
+		    <% @holidays.each do |holiday| %>
+			    <tr class="<%= cycle('even', 'odd') -%> hascontextmenu issue">
+			      <td> <%= check_box_tag "selected_holidays[]", holiday.id, false %> </td>			    
+			    	<td> <%=holiday.holiday_for%> </td>
+			    	<td> <%=holiday.holiday_date.strftime("%B %d, %Y") rescue nil%> </td>
+			    	<td> <%=holiday.holiday_date.strftime("%A") rescue nil%> </td>
+			    </tr>
+		    <% end %>
+      </tbody>
+	  </table>
+  <%end%>	  
+<%else%>
+  <p><%= l(:message_calender_not_added_yet) %></p>
+<%end%>
+
+<p>
+	<h3><%= l(:heading_add_holiday_calender) %></h3>
+</p>
+
+<%= form_for :holiday, url:  systango_hrm_holidays_path do |f| %>
+	<div class="box tabular">
+		<% if @holiday and !@holiday.errors.blank? %>
+			<div id="errorExplanation">
+			  <ul>
+				  <% @holiday.errors.messages.values.each do |message| %>
+	      		<% message.each do |msg| %>
+							<li><%= msg %></li>
+						<%end %>
+				  <% end %>
+			  </ul>
+		  </div>
+		<% end %>
+		<p>
+		  <%= f.label(:select_date) do  %>
+		  	Select Date <font color="red">*</font>
+	  	<%end%>
+		  <%= f.text_field :holiday_date, :size => 10 %>
+	  </p>
+	  <p>
+		  <%= f.label(:holiday_for) do  %>
+		  	Holiday For <font color="red">*</font>
+	  	<%end%>
+		  <%= f.text_field :holiday_for, :size => 10 %>
+	  </p>
+	</div>
+  <%= f.submit l(:submit_form), :class => "left" %>
+<% end %>
+
+<p class="contextual"><%= link_to_go_back %></p>
+<%= context_menu url_for( {:controller => "systango_hrm_holidays", :action => "context_menu"} )%>

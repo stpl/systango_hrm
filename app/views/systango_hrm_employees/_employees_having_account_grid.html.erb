@@ -1,0 +1,30 @@
+<h3> <%= l(:heading_list_of_user_not_having_leave_account) %> </h3>
+<%# since we are using redmine's context menu, and its redmine's way of creating the context menus.%>
+<%= form_tag({}) do %>
+  <table class="list issues text-center">
+	  <thead>
+		  <tr>
+		    <th class="checkbox hide-when-print">
+		      <%= link_to image_tag('toggle_check.png'), {},
+                                  :onclick => 'toggleIssuesSelection(this); return false;',
+                                  :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}" %>
+        </th>
+			  <th><%= l(:label_name) %></th>
+			  <th><%=l(:label_designation)%></th>
+			  <th><%=l(:label_maternity_option_value)%></th>
+			  <th><%=l(:label_leave_applicable_from)%></th>
+		  </tr>
+	  </thead>
+	  <tbody>
+		  <% details.each do |detail| %>				
+			  <tr class="<%= cycle('even', 'odd') -%> hascontextmenu issue">
+			    <td> <%= check_box_tag "selected_leave_accounts[]", detail.user_id, false %> </td>
+				  <td> <%= detail.user.name rescue nil %> </td>
+				  <td> <%= detail.designation.designation rescue nil%> </td>
+				  <td> <%= detail.is_eligible_for_maternity_leave %> </td>
+				  <td> <%= detail.user.systango_hrm_designation_histories.order_by_id_desc.first.applicable_from rescue nil %></td>
+			  </tr>
+		  <% end %>
+  	</tbody>
+  </table>
+<%end%>

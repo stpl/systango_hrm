@@ -1,0 +1,37 @@
+designation_history_1:
+ id: 1
+ user_id: 1
+ new_designation_id: 2
+ applicable_from: 2013-01-01
+ remarks: Test
+ 
+designation_history_2:
+ id: 2
+ user_id: 1
+ prev_designation_id: 2
+ new_designation_id: 3
+ applicable_from: 2014-03-01
+ remarks: Promoted
+
+designation_history_3:
+ id: 3
+ user_id: 2
+ prev_designation_id: 1
+ new_designation_id: 2
+ applicable_from: 2014-01-01
+ remarks: Test remarks
+ 
+designation_history_4:
+ id: 4
+ user_id: 3
+ prev_designation_id: 1
+ new_designation_id: 2
+ applicable_from: 2014-02-01
+ remarks: Test remarks
+
+designation_history_5:
+  id: 5
+  user_id: 4
+  new_designation_id: 1
+  applicable_from: 2014-01-01
+  remarks: Test

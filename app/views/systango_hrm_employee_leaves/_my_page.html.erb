@@ -1,0 +1,47 @@
+<% if User.current.login? %>
+  <fieldset>
+		<legend>
+		  <h1> <%= l(:heading_leave)%> </h1>
+	  </legend>
+	  <ul>
+      <p>
+		    <%= "<li>#{link_to(l(:label_link_apply_leave), new_systango_hrm_employee_leafe_path)}</li>".html_safe if user_permission?('apply_leave') %>
+      </p>
+      <p>
+        <%= "<li>#{link_to(l(:permission_view_leave_report_self), report_self_path)}</li>".html_safe  if user_permission?('view_leave_report_self') %>
+      </p>
+
+      <p> 
+        <%= "<li>#{link_to(l(:permission_manage_leave_request), leaves_manage_path)}</li>".html_safe if user_permission?('manage_leave_request')%>
+      </p>
+
+      <p>
+        <%= "<li>#{link_to(l(:permission_view_leave_report_hr_or_tl), report_path)}</li>".html_safe if user_permission?('view_leave_report_hr_or_tl')%>
+      </p>
+      <p>
+        <%= "<li>#{link_to(l(:permission_add_compoff_details), new_systango_hrm_compoff_path)}</li>".html_safe if user_permission?('add_compoff_details') %>
+      </p>
+      <p>
+        <%= "<li>#{link_to(l(:permission_show_subordinate_and_its_teamlead), teamleads_list_path)}</li>".html_safe if user_permission?('show_subordinate_and_its_teamlead') %>
+      </p>
+      <p>
+        <%= "<li>#{link_to(l(:label_link_view_holday_calendar),holidays_calendar_path)}</li>".html_safe %>
+      </p>
+      <p>
+        <%= "<li>#{link_to(l(:permission_add_teamlead_subordinates_details), teamleads_subordinates_path)}</li>".html_safe if user_permission?('add_teamlead_subordinates_details')%>
+      </p>
+      <p>
+        <%= "<li>#{link_to(l(:permission_add_designation_wise_entitled_leaves), systango_hrm_designations_path)}</li>".html_safe if user_permission?('add_teamlead_subordinates_details') %>
+      </p>
+      <p>
+        <%= "<li>#{link_to(l(:permission_add_employee_leave_details),employees_new_path)}</li>".html_safe if user_permission?('add_employee_leave_details') %>
+      </p>
+      <p>
+        <%= "<li>#{link_to(l(:permission_add_subject_for_leave), new_systango_hrm_subject_path)}</li>".html_safe if user_permission?('add_subject_for_leave')  %>
+      </p>
+      <p>
+        <%= "<li>#{link_to(l(:permission_add_holiday_calendar), systango_hrm_holidays_path)}</li>".html_safe if user_permission?('add_holiday_calendar') %>
+      </p>
+    </ul>
+  </fieldset>
+<% end %>

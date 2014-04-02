@@ -1,0 +1,12 @@
+<%= render 'shared_css_js/css_js' %>
+
+<p class="contextual">
+	<%= link_to_leave_dash_board %> | <%= link_to "Leave Report", report_path %> | <%= link_to_go_back %>
+</p>
+<h2><%= @leave_status.capitalize %> <%= l(:heading_leave_request) %></h2>
+
+<%= will_paginate @all_leaves unless @all_leaves.blank? %>
+
+<p><%= render :partial => "systango_hrm_employee_leaves/requests", :locals => { :leaves => @all_leaves } %></p>
+
+<p class="contextual"><%= link_to "Leave Report", report_path %> | <%= link_to_go_back  %></p>

@@ -1,0 +1,3 @@
+<p><%= @leave.applied_user.name.titleize rescue nil %> has applied leave with subject: <%= @leave.systango_hrm_subject.subject rescue nil %></p>
+
+<%= render :partial => "leave_request", :locals => { :leave => @leave } %>

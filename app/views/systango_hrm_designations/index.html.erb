@@ -1,0 +1,61 @@
+<%= render 'shared_css_js/css_js' %>
+<p class="contextual">
+	<%= link_to_leave_dash_board %> | <%=link_to_go_back %>
+</p>
+<% unless @existing_designations.blank? %>
+	<h3> <%= l(:table_heading_annual_entitled_leaves) %> </h3>
+	<%# since we are using redmine's context menu, and its redmine's way of creating the context menus.%>
+	<%= form_tag({}) do %>
+	  <table class="list issues text-center">
+		  <thead>
+			  <tr>
+		      <th class="checkbox hide-when-print">
+			      <%= link_to image_tag('toggle_check.png'), {},
+                                  :onclick => 'toggleIssuesSelection(this); return false;',
+                                  :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}" %>
+          </th>
+				  <th><%=l(:label_designation)%></th>
+				  <th><%=l(:label_entitled_leaves)%></th>
+			  </tr>
+		  </thead>
+		  <tbody>
+			  <% @existing_designations.each do |designation| %>				
+				  <tr class="<%= cycle('even', 'odd') -%> hascontextmenu issue">
+				    <td> <%= check_box_tag "selected_designations[]", designation.id, false %> </td>
+					  <td> <%= designation.designation %> </td>
+					  <td> <%= designation.leaves_entitled %> </td>
+				  </tr>
+			  <% end %>
+		  </tbody>
+	  </table>
+	<%end%>
+<% end %>
+<h3><%= l(:heading_add_entitled_leaves) %></h3>
+<%= form_for :designation, url: systango_hrm_designations_path do |f| %>
+	<div class="box tabular">
+		<% unless @designation.errors.blank? %>
+			<div id="errorExplanation">
+				<ul>
+					<% @designation.errors.messages.values.each do |message| %>
+	      		<% message.each do |msg| %>
+							<li><%= msg %></li>
+						<%end %>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+		<p>
+			<%= f.label(:designation) do %>
+				Desgination <font color="red">*</font>
+			<%end%>		
+			<%= f.text_field :designation, :size => 20 %></p>
+		<p>
+			<%= f.label(:entitled_leaves) do %>
+			  Entitled leaves <font color="red">*</font>
+			<%end%>
+			<%= f.text_field  :leaves_entitled, :size => 20 %></p>
+	</div>
+	<%= f.submit l(:submit_form) ,:class=>"left" %>
+<%end%>
+<p class="contextual"><%= link_to_go_back %></p>
+<%= context_menu url_for( {:controller => "systango_hrm_designations", :action => "context_menu"} )%>

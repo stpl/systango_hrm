@@ -1,0 +1,9 @@
+<p>Leave Type: <%= leave.leave_type %></p>
+
+<p>From: <%= leave.leave_start_date.strftime(leave.is_half_day ? "%b %d, %y %H:%M" : "%b %d, %y") %></p>
+
+<p>To: <%= leave.leave_end_date.strftime(leave.is_half_day ? "%b %d, %y %H:%M" : "%b %d, %y") %></p>
+
+<p>Remarks: <%= leave.remark %></p>
+
+<p>To approve/unapprove, please visit: <%= url_for application_systango_hrm_employee_leafe_url(leave.id) %></p>

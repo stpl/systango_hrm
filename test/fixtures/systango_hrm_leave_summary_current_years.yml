@@ -1,0 +1,27 @@
+leave_summary_1:
+  id: 1
+  user_id: 1
+  leaves_entitled: 16
+  leaves_taken: 3
+  total_comp_off_provided: 0
+
+leave_summary_2:
+  id: 2
+  user_id: 2
+  leaves_entitled: 18
+  leaves_taken: 2
+  total_comp_off_provided: 1
+  
+leave_summary_3:
+  id: 3
+  user_id: 3
+  leaves_entitled: 18
+  leaves_taken: 2
+  total_comp_off_provided: 1
+
+leave_summary_4:
+  id: 4
+  user_id: 4
+  leaves_entitled: 16
+  leaves_taken: 2
+  total_comp_off_provided: 1

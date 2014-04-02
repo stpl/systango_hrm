@@ -1,0 +1,51 @@
+<%= render 'shared_css_js/css_js' %>
+<p class="contextual">
+	<%= link_to_leave_dash_board %> | <%= link_to_go_back %>
+</p>
+<h3> <%= l(:label_show_approvers_of_leave) %>  </h3>
+<%= form_for :teamlead_subordinate, url: teamleads_show_teamleads_subordinates_path do |f|%>
+	<div class="box tabular">
+	  <p class="select_position">
+		  <%= f.label(:user) do  %>
+		  	User <font color="red">*</font>
+	  	<%end%>
+		  <% unless @employees.blank? %>
+		    <%= select_tag "user_id", options_from_collection_for_select(@employees, "id", "name", params["user_id"]), include_blank: true, id: "user_id", :class=> "select_width", :onchange => "this.form.submit(); return false;" %>
+	    <% else %>
+	      <%= l(:label_message_no_user_added) %>
+	    <% end %>
+	  </p>
+		<%= f.hidden_field :teamlead_id, :value => 'select' %>
+	</div>
+<% end %>
+
+<% if @user %>
+  <p>
+	  <b><u><%= @user.name %>'s</u> <%= l(:label_leaves_approved_by) %></b>
+  </p>
+	<% if @teamleads.blank? %>
+		<p><%= l(:label_no_record) %></p>
+	<% else %>
+	  <p>
+		  <ul>
+		    <% @teamleads.each do |teamlead|  %>
+			    <li><%= teamlead %></li>
+		    <% end %>
+	    </ul>
+    </p>
+	<% end %>
+	<p>
+	  <b><u><%= @user.name %></u> <%= l(:label_approve_leave_of) %> </b>
+  </p>
+	<% if @subordinates.blank? %>
+		<p><%= l(:label_no_record)%></p>
+	<% else %>
+		<ul>
+		  <% @subordinates.each do |subordinate| %>
+			  <li><%= subordinate %></li>
+		  <% end %>
+	  </ul>
+  <% end %>
+<% end %>
+
+<p class="contextual"><%=  link_to_go_back %></p>

@@ -1,0 +1,77 @@
+employee_leave_1:
+  id: 1
+  user_id: 1
+  is_half_day: 0
+  is_maternity_leave: 0
+  leave_start_date: 2014-03-12 00:00:00
+  leave_end_date: 2014-03-12 00:00:00
+  subject_id: 1
+  remark: Test Remarks
+  status: approved
+  created_at: 2014-01-01 20:00:00
+  updated_at: 2014-01-01 20:00:00
+  
+employee_leave_2:
+  id: 2
+  user_id: 1
+  is_half_day: 1
+  leave_start_date: 2014-03-11 00:00:00
+  leave_end_date: 2014-03-11 00:00:00
+  subject_id: 2
+  remark: Test1 Remarks1
+  status: pending
+  created_at: 2014-01-01 20:00:00
+  updated_at: 2014-01-01 20:00:00
+  
+employee_leave_3:
+  id: 3
+  user_id: 1
+  is_half_day: 0
+  is_maternity_leave: 1
+  leave_start_date: 2014-01-01 08:00:00
+  leave_end_date: 2014-03-15 08:00:00
+  subject_id: 2
+  remark: Test1 Remarks1
+  status: pending
+  created_at: 2014-01-01 20:00:00
+  updated_at: 2014-01-01 20:00:00
+  
+employee_leave_4:
+  id: 4
+  user_id: 2
+  is_half_day: 1
+  is_maternity_leave: 0
+  leave_start_date: 2014-03-12 00:00:00
+  leave_end_date: 2014-03-12 00:00:00
+  subject_id: 1
+  remark: Test Remarks
+  status: approved
+  created_at: 2014-01-01 20:00:00
+  updated_at: 2014-01-01 20:00:00
+
+employee_leave_5:
+  id: 5
+  user_id: 3
+  is_half_day: 0
+  is_maternity_leave: 0
+  leave_start_date: 2014-03-12 00:00:00
+  leave_end_date: 2014-03-12 00:00:00
+  subject_id: 1
+  remark: Test Remarks
+  status: unapproved
+  created_at: 2014-01-01 20:00:00
+  updated_at: 2014-01-01 20:00:00
+
+employee_leave_6:
+  id: 6
+  user_id: 3
+  referral_id: 2
+  is_half_day: 0
+  is_maternity_leave: 0
+  leave_start_date: 2014-03-12 00:00:00
+  leave_end_date: 2014-03-12 00:00:00
+  subject_id: 1
+  remark: Test Remarks
+  status: unapproved
+  created_at: 2014-01-01 20:00:00
+  updated_at: 2014-01-01 20:00:00

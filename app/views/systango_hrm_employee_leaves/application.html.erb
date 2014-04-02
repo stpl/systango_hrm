@@ -1,0 +1,106 @@
+<%= render 'shared_css_js/css_js' %>
+
+<p class="contextual">
+	<%= link_to_leave_dash_board %> |
+	<%if show_details? %>
+	 <%= link_to l(:label_manage_request), leaves_manage_path %> |
+	<%end%>
+	<%=link_to_go_back %>
+</p>
+
+<%if !@request_changed_by_user.nil? and !@request_changed_by_user.errors.blank?%>
+	<p>
+		<div id="errorExplanation">
+		 <ul>
+		   <% @request_changed_by_user.errors.messages.values.each do |message| %>
+	      	<% message.each do |msg| %>
+						<li><%= msg %></li>
+					<%end %>
+		   <% end %>
+		 </ul>
+		</div>
+	</p>
+<%end%>
+
+<h3><%= l(:heading_application)%></h3>
+<%= form_for :systango_hrm_employee_leave, url: leaves_status_path do |f| %>
+	<div class="issue">
+		<h4>
+			<%= l(:label_leave_applied) %>
+			<u>
+			  <% if show_link_to_report? %>
+		    	<%=  @leave_detail.applied_user.name rescue nil %>
+			  <%else%>
+		    	<%= link_to @leave_detail.applied_user.name, leave_report_path(:id => @leave_detail.id.to_i) %>
+		  	<%end%>
+	  	</u>
+	  </h4>
+
+		<%= hidden_field_tag "id", @leave_detail.id %>
+		<table class="attributes">
+			<tr>
+				<th><%= f.label :referred_by%>:</th>
+				<td><%= @leave_detail.referred_user ? (@leave_detail.user.name rescue nil) : (SystangoHrm::Constants::SELF).downcase %></td>
+				<th><%= f.label :leave_type%>:</th>
+				<td><%= @leave_detail.leave_type %></td>
+			</tr>
+			<tr>
+				<th><%= f.label :applied_on%>:</th>
+				<td><%= @leave_detail.created_at.strftime("%B %d, %Y") rescue nil %></td>				
+				<th><%= f.label :subject%>:</th>
+				<td><%= @leave_detail.systango_hrm_subject.subject rescue nil %></td>
+			</tr>
+			<tr>
+				<th><%= f.label :leave_start_date%>:</th>
+				<td><%= @leave_detail.leave_start_date.strftime("%B %d, %Y") rescue nil %></td>			
+				<th><%= f.label :leave_end_date%>:</th>
+				<td><%= @leave_detail.leave_end_date.strftime("%B %d, %Y") rescue nil %></td>
+			</tr>
+			<tr>
+				<th><%= f.label :remarks%>:</th>
+				<td><%= @leave_detail.remark%></td>
+			</tr>
+		  <% if show_details? %>
+		  	<tr>
+			    <th><%= f.label :leave_final_status, l(:label_for_status)+":" %></th>
+			    <td><%= @leave_detail.status %></td> 
+		    </tr>
+	      <% if !@request_reciever.blank? and !@request_reciever.cancel? %>
+					<tr>
+			      <th>
+		      		<%= f.label(:comment) do %>
+      					Add comment: <font color="red">*</font>
+      				<%end%>
+    				</th>
+			      <td>
+			      	<%= f.text_area :comment, :id => "message_area", :cols => 20, :rows => 5, :class => "wiki-edit"%>
+		      	</td>	
+	        </tr>	      		
+      	<% end %>
+    	<% end %>
+		</table>
+	</div>
+	<% if show_details? %>
+		<% if @request_reciever.pending? %>
+      <%= f.submit l(:button_approve), :name => 'approve',:class=>"left"%>
+    	<%= f.submit l(:button_unaprrove), :name => 'unapprove',:class=>((@leave_detail.pending? and current_user_is_applied_user?) ? "left" : "" )%>
+    <%elsif @request_reciever.approved? %>
+      <%= f.submit l(:button_unaprrove), :name => 'unapprove'%>
+    <% elsif @request_reciever.unapproved? %>
+      <%= f.submit l(:button_approve), :name => 'approve' %>
+    <% end %>
+  <% end %>
+	<%= f.submit(l(:button_cancel_leave), :name => 'cancel',:class=>"left") if @leave_detail.pending? and current_user_is_applied_user?%>
+<% end %>
+<%= button_to(l(:button_update_leave), edit_systango_hrm_employee_leafe_path(@leave_detail.id), :method 	=> "get") if @leave_detail.pending? and current_user_is_applied_user? %>
+<% if show_details? %>
+  <p>
+  	<h3>
+  		<%= l(:heading_approver) %>
+		</h3>
+	</p>
+  <%= render :partial => "systango_hrm_employee_leaves/leave_approvers_of_application"%>
+<%end%>
+<p class="contextual">
+	<%= link_to(l(:label_manage_request), leaves_manage_path) if show_details?  %> | <%= link_to_go_back %>
+</p>

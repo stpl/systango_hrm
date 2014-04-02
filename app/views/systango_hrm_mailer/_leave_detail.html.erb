@@ -1,0 +1,12 @@
+<p>Leave from: <%= leave.applied_user.name.titleize rescue nil%></p>
+
+<p>Leave Type: <%= leave.leave_type %></p>
+
+<p>Applied on: <%=  leave.created_at.strftime("%B %d, %Y") %><p>
+
+<p>Start date: <%=  leave.leave_start_date.strftime(leave.is_half_day ? "%b %d, %y %H:%M" : "%b %d, %y") %></p>
+
+<p>End date: <%=  leave.leave_end_date.strftime(leave.is_half_day ? "%b %d, %y %H:%M" : "%b %d, %y")  %></p>
+<p>Subject: <%=  leave.systango_hrm_subject.subject %></p>
+
+

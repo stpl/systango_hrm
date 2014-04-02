@@ -1,0 +1,8 @@
+<ul>
+  <%= call_hook(:view_employees_context_menu_start, {:leave_accounts => @leave_accounts, :can => @can, :back => @back }) %>
+
+  <% if !@leave_account.nil? and @leave_accounts.size == 1 %>
+	  <li><%= context_menu_link 'Edit', edit_systango_hrm_employee_path(@leave_account.user_id),:class => 'icon-edit', :disabled => !@can[:edit] %></li>
+  <%end%>
+  <%= call_hook(:view_employees_context_menu_end, {:leave_accounts => @leave_accounts, :can => @can, :back => @back }) %>
+</ul>

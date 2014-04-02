@@ -1,0 +1,4 @@
+<p>This leave has been updated.</p>
+
+<p>A seperate email would follow with the following subject: 
+<%= "#{@updated_leave.systango_hrm_subject.subject} applied by #{@user.name.titleize} from- #{@updated_leave.leave_start_date.strftime("%b %d, %Y")} to- #{@updated_leave.leave_end_date.strftime("%b %d, %Y")}" %> </p>

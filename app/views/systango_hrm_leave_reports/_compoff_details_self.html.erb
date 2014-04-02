@@ -1,0 +1,18 @@
+<table class="list issues text-center">
+	<thead>
+	  <tr>
+		  <th><%= l(:label_comp_offs_given) %></th>
+		  <th><%= l(:label_remarks) %></th>
+		  <th><%= l(:label_credited_on) %></th>
+	  </tr>
+ 	</thead>
+ 	<tbody>
+	  <% @compoffs.each do |compoff| %>
+		  <tr class="<%= cycle('even', 'odd') -%> issue">
+			  <td><%= compoff.comp_off_given %></td>
+			  <td><%= compoff.comp_off_remarks %></td>
+			  <td><%= compoff.created_at.strftime("%b %d, %y") rescue nil %></td>
+		  </tr>
+  	<% end %>
+ 	</tbody>
+</table>

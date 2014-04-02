@@ -1,0 +1,62 @@
+<%= render 'shared_css_js/css_js' %>
+<p class="contextual">
+	<%= link_to_leave_dash_board %> | <%=  link_to_go_back %>
+</p>
+<p><h3><%= l(:heading_for_leave_account) %></h3></p>
+<h4> 
+	<b>
+		<%= l(:label_update_leave_account_for) %> 
+			<u>
+				<%= @leave_account.user.name rescue nil %>
+			</u>
+	</b>
+</h4>
+<%= form_for :employee_leave_account, url: systango_hrm_employee_path, method: :put do |f| %>
+	<div class="box tabular">
+		<% if  !@leave_account.blank? and !@leave_account.errors.blank? %>
+			<div id="errorExplanation">
+				<ul>
+					<% @leave_account.errors.messages.values.each do |message| %>
+	      		<% message.each do |msg| %>
+							<li><%= msg %></li>
+						<%end %>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+		<p>
+			<%= f.label :maternity_leave, l(:label_for_maternity_leaves)%> 
+			<%= f.check_box :maternity_leave, :checked => (@leave_account.is_eligible_for_maternity_leave rescue nil)%>
+		</p>
+		<% if (@designation_histories.count == 1 and !@designation_history.id?) or  @designation_history.prev_designation_id.nil? %>
+		  <p class="select_position">	   
+		    <%= f.label(:designation) do  %> 
+		    	Current designation <font color="red">*</font>
+	    	<%end%>
+		    <%= select_tag "designation_id", options_from_collection_for_select(@designations, "id", "designation", @leave_account.designation.id), id: "designation_id" ,class: "select_width"%>
+	    </p>
+	    <p>
+				<%= f.label(:date_of_joining) do  %>
+			  	Date of joining <font color="red"> *</font>
+		  	<%end%>
+		    <%= f.text_field :date_of_joining, :size => 10, :value => ((@leave_account.date_of_joining.nil? ? params[:employee_leave_account][:date_of_joining] : @leave_account.date_of_joining) rescue nil) %>
+		  </p>
+    <% else %>
+		  <p class="select_position">
+		    <%= f.label :designation, 'Current designation:'  %>
+		    <%= @leave_account.designation.designation rescue nil %>
+	    </p>
+	    <p>
+		    <%= f.label :date_of_joining, 'Date of joining:'  %> 
+		    <%= @leave_account.date_of_joining %>
+		  </p>
+    <% end %>
+	</div>
+  <%= f.submit l(:button_update),:class=> "left" %>
+<% end %>
+
+<div id='with-clearfix' class='clearfix'></div>
+<%= render :partial => "systango_hrm_designation_histories/edit_designation_history", :locals => { :leave_account => @leave_account, :designations => @designations,:designation_history => @designation_history} %>
+
+<%= render :partial => "systango_hrm_designation_histories/show_designation_history", :locals => { :designation_histories => @designation_histories} %>
+<p class="contextual"><%= link_to_go_back %></p>

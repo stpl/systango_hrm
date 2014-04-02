@@ -1,0 +1,14 @@
+holiday_1:
+    id: 1
+    holiday_date: 2014-03-12
+    holiday_for: New Year
+
+holiday_2:
+    id: 2
+    holiday_date: 2014-01-26
+    holiday_for: Republic Day
+    
+holiday_3:
+    id: 3
+    holiday_date: 2014-12-31
+    holiday_for: Year End

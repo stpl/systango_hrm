@@ -1,0 +1,75 @@
+<%= render 'shared_css_js/css_js' %>
+<p class="contextual">
+	<%= link_to_leave_dash_board %> | <%= link_to_go_back %>
+</p>
+
+<h3><%= l(:headding_for_comp_off)%></h3>
+
+<%= form_for :compoff, url: systango_hrm_compoffs_url do |f| %>
+	<div class="box tabular">
+    <% if @compoff and !@compoff.errors.blank? %>
+      <p>
+      	<div id="errorExplanation">
+	      	<ul>
+		      	<% @compoff.errors.messages.values.each do |message| %>
+		      		<% message.each do |msg| %>
+								<li><%= msg %></li>
+							<%end %>
+		      	<% end %>
+	      	</ul>
+      	</div>
+    	</p> 
+    <%end%>
+		<p class="select_position">
+		  <%= f.label(:users) do %>
+		  	Users <font color="red">*</font>
+		  <% end %>
+		  <% unless @users.blank? %>
+		    <%= select_tag("user_id", options_from_collection_for_select(@users, "id", "name", params["user_id"]), include_blank: true, id: "user_id",:class=>"select_width", :test => "test", :onchange => "this.form.submit(); return false;")  %>
+	    <% else %>
+	      <%= l(:label_no_employee_have_leave_account) %>
+	    <% end %>
+	  </p>
+	  <p>
+		  <%= f.label(:comp_off_given) do %>
+		  	Approved days in lieu / comp-offs<font color="red">*</font>
+ 			<%end%>
+		  <%= f.text_field :comp_off_given, size: 13,:value =>((params[:compoff][:comp_off_given]) rescue nil)%>
+	  </p>
+	  <p>
+		  <%= f.label(:remarks) do  %>
+		  	Remarks <font color="red">*</font> 
+	  	<%end%>
+		  <%= f.text_area :comp_off_remarks, :id => "message_area", :cols => 80, :rows => 3,:class=>"wiki-edit",:value => ((params[:compoff][:comp_off_remarks])  rescue nil)%>
+	  </p>
+	</div>
+	<%= f.submit l(:submit_form), :class => "left" %>
+<%end%>
+
+<div id='with-clearfix' class='clearfix'></div>
+<% if !@compoffs.blank? %>
+  <p>
+  	<b><%="Comp off details of #{User.find(params[:user_id]).name}"%></b>
+	</p>
+  <table class="list issues text-center">
+    <thead>
+    	<tr>
+      	<th><%= l(:label_comp_offs_given) %></th>
+      	<th><%= l(:label_remarks) %></th>
+      	<th><%= l(:label_comp_off_submitted_on) %></th>
+    	</tr>
+   	</thead>
+   	<tbody>
+      <% @compoffs.each do |compoff| %>
+	      <tr class="<%= cycle('even', 'odd') -%> issue">
+		      <td><%= compoff.comp_off_given %></td>
+		      <td><%= compoff.comp_off_remarks %></td>
+		      <td><%= compoff.created_at.strftime("%B %d, %Y") %></td>
+	      </tr>
+    	<% end %>
+   	</tbody>
+  </table>
+<% elsif !params[:compoff].blank? %>
+  <p><%= l(:label_no_record) %></p>
+<%end%>
+<p class="contextual"><%= link_to_go_back %></p>

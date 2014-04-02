@@ -1,0 +1,5 @@
+<% if @is_added %>
+	<p> <%= @teamlead_user.name.titleize %> is now leave approver of <%= @subordinate_user.name.titleize rescue nil %>. </p>
+<%else%>
+	<p><%= @teamlead_user.name.titleize%> is no longer leaves approver of: <%= @subordinate_user.name.titleize rescue nil %></p>
+<%end%>

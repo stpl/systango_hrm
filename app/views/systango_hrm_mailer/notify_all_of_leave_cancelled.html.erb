@@ -1,0 +1,8 @@
+<h2><u><%= @current_user.name.titleize %></u> has canceled the following leave application:</h2>
+
+<%= render :partial => "leave_detail", :locals => { :leave => @leave_application } %>
+
+<p>
+<%= @current_user.name.titleize %> changed the status to: <u><%='Cancel'%></u>
+</p>
+

@@ -1,0 +1,16 @@
+<%if @is_subordinate_added%>
+	Following persons are your leave approvers -
+<% else %>
+	<p>Your leave is no longer be approved by <%= @teamlead.name.titleize %>.</p>
+	<p> Your rest leave approvers are - </p>
+	<%= (SystangoHrm::Constants::NONE).titleize if @present_teamleads.blank? %>
+<% end %>
+
+<% @present_teamleads.each do |teamlead| %>
+  <p><%= teamlead.name rescue nil %></p>
+<% end %>
+
+<%if @is_subordinate_added%>
+	<p>Your new leave approver is -</p>
+	<%= @teamlead.name.titleize rescue nil %>
+<%end%>

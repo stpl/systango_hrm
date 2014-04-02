@@ -1,0 +1,24 @@
+<%= stylesheet_link_tag "fieldset", :plugin => 'systango_hrm'%>
+
+<% if User.current.admin_user? or User.current.allowed_to_globally?(:manage_leave_request, {}) %>
+  <h3><%= l(:heading_for_pending_leaves)%></h3>
+  <% if pending_employee_leaves.blank? %>
+		<p><%= l(:message_for_no_pending_leaves) %></p>
+	<% else %>
+	  <%= render :partial => "systango_hrm_employee_leaves/requests", :locals => { :leaves => pending_employee_leaves[0...5] } %>
+	  <p>
+      <%= link_to( l(:link_view_more), leaves_pending_path, :class=> 'apply') if pending_employee_leaves.length>5 %>
+    </p>
+	<% end %>
+<% end %>
+
+<h3><%= l(:heading_for_latest_leaves) %></h3>
+
+<% if leaves_of_current_user.blank? %>
+  <p><%= l(:message_for_no_latest_leaves) %></p>
+<% else %>
+  <%= render :partial => "systango_hrm_employee_leaves/requests", :locals => { :leaves => leaves_of_current_user[0...5] } %>
+  <p>
+    <%= link_to( l(:link_view_more),report_self_path, :class=> 'apply') if leaves_of_current_user.count>5 %>
+  </p>
+<% end %>

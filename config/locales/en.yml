@@ -1,0 +1,251 @@
+# English strings go here for Rails i18n
+"en":
+  permission_add_designation_wise_entitled_leaves: Manage designations and leaves entitlements
+  permission_add_employee_leave_details: Manage leave accounts
+  permission_add_compoff_details: Manage day in lieu/comp-offs
+  permission_add_teamlead_subordinates_details: Manage leaves approval hierarchy 
+  permission_add_holiday_calendar: Manage holiday calendar
+  permission_add_subject_for_leave: Manage leave categories
+  permission_apply_leave: Ability to apply for leaves
+  permission_manage_leave_request: Manage leaves
+  permission_view_leave_report_hr_or_tl: Leaves reports all
+  permission_view_leave_report_self: View leaves report only me
+  permission_show_subordinate_and_its_teamlead: View leaves approval hierarchy
+  permission_hr_permissions: Final leave approval
+  
+  label_link_apply_leave: Apply leaves here
+  label_link_view_holday_calendar: View holiday calendar
+
+  label_designation: Designation
+  label_leave_balance: Leave balance
+  
+  label_promotion_for: Update designation/leave account for
+  label_previous_designation: Previous designation
+  label_new_designation: New designation
+  
+  label_no_employee_have_leave_account: No user has leave account
+  label_comp_off_submitted_on: Submitted on
+  
+  heading_list_of_user_not_having_leave_account: List of users having account with their details
+  heading_designation_details_for: Designation details for
+  
+  label_users_have_leave_account: Users have leave account
+  label_users_have_no_leave_account: Users not have leave account
+  label_update_leave_account_for: Current designation/leave account for
+  label_maternity_option_value: Maternity option value
+
+  label_add_approvres_of_leave: Add approvers and corresponding users
+  label_approver_user: Approver
+  button_remove_subordinate: Remove
+  button_add_subordinate: Add
+  label_message_to_select_subordinate: (Select check box to remove user/s)
+  label_message_to_add_subordinate: (Select check box to add user/s)
+  no_teamlead_added_message: There is no approver added.
+  label_aprrover_for: Approver for
+  label_leave_approver_of: can approve leaves of -
+  
+  label_show_approvers_of_leave: Show approvers and corresponding users
+  label_message_no_user_added: No user added.
+  label_leaves_approved_by: leaves are approved by
+  label_approve_leave_of: approves leaves of
+  label_no_record: None
+  
+  submit_form: Submit
+  label_entitled_leaves: Leaves entitlement
+  label_holiday: Holiday for
+  label_weekday: Weekday
+  label_edit: Edit
+  label_delete: Delete
+  label_date: Date
+  label_employee_have_account: Users with leave account
+  label_employee_not_have_account: Users with no leave account yet
+  label_click_here: "Click here to "
+  label_leave_applicable_from: Applicable from
+  label_search_result: Search results..
+  label_account: Account details
+  label_leave_entitled: Leaves entitled for year
+  label_leave_applicable: Entitled leaves applicable from date
+  label_leave_taken: Leaves taken
+  label_maternity_leave: Maternity leave
+  label_comp_offs: Total comp-offs
+  label_for_maternity_leaves: Eligible for maternity leaves
+
+  confirm_delete: Are you sure?
+  
+  button_reset_all: Reset all
+  button_update: Update
+  button_approve: Approve
+  button_unaprrove: Unapprove
+  button_cancel_leave: Cancel leave
+  button_update_leave: Update leave
+  button_submit_continue: Submit and continue
+  button_submit_view: Submit and view
+  button_recalculate: Recalculate holiday
+  go_back: Go back
+  label_leave_applied:  Leave applied by - 
+  label_leave_dashboard: Leave dashboard
+  label_manage_request: Manage request
+  heading_application: View application
+  heading_approver: "Approved / Unapproved by:"
+  label_name: Name
+  label_status: Status
+  label_comment: Comment
+  label_user: User
+  label_employee_code: Employee code
+  label_referred: Referred by
+  label_leave_type: Leave type
+  label_apply_leave: Applied on
+  label_leave_start: Leave start date
+  label_leave_end: Leave end date
+  label_category: Category
+  label_refer: Reffered
+  label_comp_offs_given: Comp-off given
+  label_total_comp_offs_given: Total comp-off given
+  label_remarks: Remarks
+  label_credited_on: Credited on 
+  label_for_status: Final leave approval status
+  label_leave_status: Leave status
+  heading_report: Leave report
+  link_to_consolidated_leave_report: View consolidated leave report
+  heading_leave_detail: Leaves entitlements
+  heading_category_add: Add categoris for leave
+  heading_update_category: Update existing category
+  heading_comp_off_detail: Day in lieu/Comp-offs
+  label_employee_dnt_have_report: No employees to view report
+  label_you_reporting: Leave approvers -
+  label_reporting_to_you: You are leave approver for - 
+  message_no_subordinate: No subordinate added.
+  message_for_leave_account_activation: Your leave account will get activated after -
+  message_for_no_pending_leaves: No pending leave requests
+  message_for_no_latest_leaves: No latest applied leaves
+  message_category_not_added: Categories not added yet
+  heading_for_latest_leaves: Latest applied leaves
+  message_for_no_subordinate: "Your subordinate's leave accounts is not yet activated, so you can not apply any referral leave."
+  label_for_half_day: Half day
+  label_for_maternity_leave: Maternity leave
+  label_for_default_application: By default above application will be sent to
+  label_employee_list: Users
+  label_designation_list: Designations
+  label_select_desgination: Select designation
+  label_leave_from: Leave from
+  label_leave_to: Leave to
+  label_select: Pivot reports by
+  label_referred: Referred
+  label_self: Self
+  label_referral: Referral
+  prompt_to_select: Please select
+  link_view_more: View more...
+  
+  error_user_not_have_manage_leaves_permissoin: "does not have 'Manage leaves' permission. Please add permission and then proceed."
+  label_if_you_are_admin: If you are Admin you can add it from
+  label_please_ask_admin_to_add_permission: Please ask admin to add permission for it.
+  
+  heading_leave_report: View leaves report
+  heading_holiday_update: Update existing holiday
+  heading_for_manage_requests: Manage leave requests
+  heading_pending: Pending leaves
+  heading_leave_request: leaves request
+  heading_leave: Leaves
+  heading_approved: Approved leaves
+  heading_unapproved: Unapproved leaves
+  heading_for_pending_leaves: Pending leave requests
+  heading_apply_leave: Apply leaves here
+  heading_add_update_employee_leaves: Manage users designations and leaves entitlements 
+  heading_for_leave_account: Edit user designation and leave account
+  heading_holiday_calender: Holiday calendar for -
+  heading_category: Manage leave category
+  message_no_employee_select: No employee to select
+  message_no_desgination: No designation added
+
+  table_heading_annual_entitled_leaves: Designation and annual leaves entitlements
+  heading_add_entitled_leaves: Add designation and leaves entitlement
+  heading_update_entitled_leaves: Update designation and leaves entitlement
+  headding_for_comp_off: Add comp-off for user
+  designation_duplicate_error: Designation already exists.
+  designation_created_notice: Designation added successfully.
+  designation_update_notice: Designation updated successfully.
+  designation_empty_field_error: Please fill all mandatory fields.
+  holiday_past_date_error: Holiday can not apply for previous dates.
+  desgination_applicable_from_error: You can not update applicable from without desgination.
+  previous_date_leaves_error: You can not apply previous date leaves.
+  desgination_date_smaller_than_previoius_error: Applicable date cannot be less than last date of promotion.
+  designation_not_update_error: Designation is not update from here.
+  designation_blank_designation_field_error: Designation cannot be blank.
+  designation_numerical_entitled_leaves_error: Leaves entitlement should be numerical.
+  designation_length_entitled_leaves_error: Leaves entitlement must be less than 2 digits.
+  holiday_created_notice: Holiday added successfully.
+  holiday_update_notice: Holiday updated successfully.
+  holiday_deleted_notice: Holiday deleted successfully.
+  holiday_blank_date_error: Holiday date cannot be blank.
+  designation_history_remarks_presence_true_error: Remarks can't be blank.
+  leaves_entitled_zero_error_message: Leaves entitlement can not be zero.
+  leaves_entitled_negative_error: Leaves entitlement can not be negative.
+  leaves_entitled_decimal_error_message: Leaves entitlement must be added like (0.5).
+  leaves_entitled_blank_error: Leaves entitlement can not be blank.
+  compoff_blank_error: Compoff can not be blank.
+  compoff_negative_error: Compoff can not be negative.
+  holiday_same_error: Two holidays cannot have same date.
+  holiday_reason_blank_error: Holiday event cannot be blank.
+  can_select_more_employees_message: Select more than one name by pressing ctrl key
+  category_update_notice: Category updated successfully.
+  employee_leave_added_notice: Leave details successfully saved for selected employee/s.
+  employee_leave_updated_notice: Leave details successfully updated for selected employee.
+  employee_blank_fields_error: Please provide all mandatory fields.
+  employee_name_select_error: Please select name of user.
+  employee_update_maternity_error: Please select mandatory fields.
+  mandatory_fields_not_selected_error: Please select mandatory fields.
+  employee_both_employees_selected_error: Please select only one employee.
+  subordinate_not_selected_error: Please select subordinate to add.
+  heading_add_holiday_calender: Add holidays in calendar
+  message_calender_not_added_yet: Calendar not added yet.
+  teamlead_subordinates_removed_notice: Team lead and its subordinate/s removed successfully and an email sent to respective persons.
+  teamlead_subordinate_added_notice: Team lead and its subordinate/s added successfully and an email sent to respective persons.
+  leave_recalulate_notice: Approved leaves are recalculated successfully.
+  leave_category_added_notice: Category added successfully.
+  leave_applied_success_notice: Leave applied successfully.
+  leave_status_change_notice: Status changed successfully.
+  leave_compoff_added_notice: Comp-off detail added successfully for the selected employee.
+  leave_update_success_notice: Leave updated successfully.
+  leave_no_records_found_message: No records found for leaves.
+  leave_no_records_found_for_account_message: No records found for leave account.
+  maternity_leave_cant_be_referred_error: Maternity leave can not be referred.
+  teamlead_not_selected_error: Please select name of team lead.
+  subordinate_not_selected_to_add_error: Please select subordinate name to add.
+  subordinate_not_selected_to_remove_error: Please select subordinate names to remove.
+  teamlead_employee_name_not_selected_error: Please select name of employee.
+  compoff_presence_true_error: Please enter comp-off days.
+  designation_not_selected_error: Please select designation
+  compoff_should_be_numerical_error: Compoff balance should be numerical.
+  compoff_remarks_presence_true_error: Please enter remark for adding comp-off.
+  leave_select_employee_name_error: Please select employee name.
+  leave_account_not_present_error: Leave details not present for any employee, go to add employee leave details.
+  leave_account_not_activated_error: Your leave accounts is not yet activated, please contact HR for the same.
+  leave_start_date_not_added_error: Leave start date can not be blank.
+  leave_end_date_not_added_error: Leave end date can not be blank.
+  leave_subject_not_selected_error: Please select a category.
+  leave_remark_not_added_error: Remark can not be blank.
+  leave_remark_length_exceded_error: Remark is too long (only 200 characters are allowed).
+  leave_half_day_date_error: Leave start date and end date should be same for half day.
+  leave_apply_improper_dates_error: Leave end date, can not be less than leave start date, please select proper dates.
+  leave_half_day_time_error: Half day end time could not be less than start time.
+  leave_report_no_record_exists_error: No record exists.
+  leave_referral_not_selected_error: Please select the name of referred person.
+  leave_comment_not_added_error: Please fill the mandatory field.
+  leave_report_no_field_selected_error: Please select one or more fields.
+  leave_improper_dates_error: Please select proper dates.
+  leave_double_maternity_apply_error: You have already applied the maternity leave.
+  leave_improper_days_for_maternity_error: You cannot apply ML for more than prescribed days.
+  application_view_authorisation_error: You are not authorised to view this application.
+  leave_maternity_and_half_day_applied_together_error: Maternity leave and half day can not be applied together.
+  applicable_from_blank_error: Applicable from can't be blank.
+  applicable_from_and_date_of_joining_error: Applicable from can not be less than or equal to Date of Joining
+  subject_presence_true_error: Category can not be blank.
+  date_of_joining_not_valid_error: Date of Joining is not a valid date.
+  maternity_leave_check_box_error: Maternity record is already up to date
+  compoff_decimal_error_message: Compoff balance must be added like (0.5).
+  compoff_zero_error_message:  Compoff balance cannot be zero.
+  proper_date_error_message: Please enter valid date in format YYYY-MM-DD.
+  mailer_subject_comp_off_added: Comp-off added notification
+  mailer_subject_subordinate_update: New updates for Subordinate
+  mailer_subject_teamlead_update: New updates for Teamlead
+  mailer_subject_teamlead_subordinate_update: New updates for Teamlead/Subordinate

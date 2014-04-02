@@ -1,0 +1,3 @@
+module SystangoHrmDesignationsHelper
+	include SystangoHrm::WelcomeHelperPatch
+end

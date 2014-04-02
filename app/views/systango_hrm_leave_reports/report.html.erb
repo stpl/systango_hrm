@@ -1,0 +1,107 @@
+<%= render 'shared_css_js/css_js' %>
+<p class="contextual">
+	<%= link_to_leave_dash_board %> | <%=  link_to_go_back %>
+</p>
+<h3><%= l(:heading_leave_report) %></h3>
+<% @self = false %>
+<%= form_for :leave, {url: report_path, method: "get"} do |f| %>
+	<div class="box tabular">
+	  <% if User.current.admin_user? %>
+	    <p>
+			  <%= f.label :select, l(:label_select)  %>
+		  	  <span id="watchers_inputs">
+			  	  <label class="floating">    
+					  	<%= f.radio_button :employee, SystangoHrm::Constants::NAME_WISE ,{:checked => (params[:leave].blank? or params[:leave][:employee] == SystangoHrm::Constants::NAME_WISE)}%>
+					  	<%=l(:label_employee_list)%>
+					  </label>
+					  <label class="floating">
+					  	<%= f.radio_button :employee, SystangoHrm::Constants::DESIGNATION_WISE ,{:checked => !(params[:leave].blank? or params[:leave][:employee] == SystangoHrm::Constants::NAME_WISE)}%>
+					    <%= l(:label_designation_list) %>
+					  </label>  
+				</span>
+		  </p>
+		  <p id="name_wise" class="select_position">
+	      <%= f.label :user, l(:label_user)%>
+	      <% unless @subordinates.blank? %>
+				  <%= select_tag("user_id", options_from_collection_for_select(@subordinates, "id", "name", params["user_id"]), include_blank: true, id: "user_id",:class =>"select_width") %>
+		      <%= link_to l(:link_to_consolidated_leave_report), (leave_report_path(:id => params[:user_id], :report => "byhr/admin") rescue "#"), :id=>"view_report" %>
+			  <% else %>
+			    <%= l(:message_no_employee_select)%>
+			  <% end %>
+			</p>
+			<p id="designation_wise" class="select_position">
+				<%= f.label :designation, l(:label_select_desgination) %>
+				<% unless @designations.blank? %>
+				  <%= select_tag "designation_id", options_from_collection_for_select(@designations, "id", "designation", params["designation_id"]), include_blank: true, id: "designation_id",:class =>"select_width" %>
+			  <% else %>
+			    <%= l(:message_no_desgination) %>
+			  <% end %>
+			</p>
+			<p>
+			  <%= f.label :leave_status, l(:label_leave_status)%>
+			  <%= f.select :status ,options_for_select(@options, :selected => (params[:leave][:status] rescue nil)) %>
+	    </p>
+	</div>
+	    <fieldset class="box tabular">
+			  <legend>
+			  	<b><%= l(:label_date)%></b>
+		  	</legend>
+			  	<label class="floating">
+			  		<%= l(:label_leave_from)%>
+					  <%= f.text_field :leave_start_between, :size => 10, :value => (params[:leave][:leave_start_between] rescue nil)%>
+				  </label>
+				  <label class="floating">
+				  	<%= l(:label_leave_to) %> 
+					  <%= f.text_field :leave_end_between, :size => 10, :value => (params[:leave][:leave_end_between] rescue nil) %>
+				  </label>
+			</fieldset>
+
+	  	<%= f.submit l(:submit_form), :class => "left" %>
+	  <% elsif @subordinates.blank? %>
+	    <p>
+	  	  <%= l(:label_employee_dnt_have_report) %>
+	    </p>
+	  <% else %>
+	    <p class="select_position"> 
+			  <b>	<%= f.label :user,  l(:label_user)%> -</b>
+		    <% unless @subordinates.blank? %>
+			    <%= select_tag "user_id", options_from_collection_for_select(@subordinates, "id", "name", params["user_id"]), include_blank: true, id: "user_id",:class =>"select_width" %>
+		    <% else %>
+		      <%= l(:message_no_subordinate) %>
+		    <% end %>
+		  </p>
+</div>
+		  	<%= f.submit l(:submit_form), :class => "left" %>
+	  <% end %>
+  <% end %>
+<%= button_to l(:button_reset_all), report_path, :method => "get"%>
+<%unless params[:commit].blank?%>
+  <%if @report_all %>
+    <%= render :partial => "systango_hrm_leave_reports/all_leaves_report"%>
+  <%end%>
+  <% if !@report.blank? %>
+    <p><b><%=l(:label_search_result)%></b></p>
+    <p>
+    	<%= will_paginate @report %>
+	  </p>
+	  <p>
+	    <% @self = false %>
+      <%= render :partial => "systango_hrm_employee_leaves/requests", :locals => { :leaves => @report} %>
+    </p>
+  <% elsif !@report_all and @report.blank? %>
+	  <p><%= l(:leave_no_records_found_message) unless params[:leave].blank? %></p>
+  <% end %>
+<%end%>
+<%unless params[:commit].blank?%>
+  <%unless @leave_account.blank? %>
+    <p> <b><%=l(:label_account)%></b> </p>
+      <%= render :partial => "systango_hrm_leave_reports/leave_account_details_of_user"%>
+  <% end %>
+<% end %>
+<p class="contextual"><%= link_to_go_back %></a></p>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#user_id').trigger("change");
+	});
+</script>
+

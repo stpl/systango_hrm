@@ -1,0 +1,47 @@
+<%= render 'shared_css_js/css_js' %>
+<%unless @leave_account.blank?%>
+  <p class="contextual">
+		<%= link_to_leave_dash_board %> | <%= link_to_go_back %>
+	</p>
+<%end%>
+<% if @leave_account %>
+  <h3><%= l(:heading_report)%> - <u> <%= @user.name %></u> <%= "- "  + @custom_value.value rescue nil %>  </h3>
+  <%= will_paginate @self_records %>
+  <div id='with-clearfix' class='clearfix'></div>
+    <% @self = true %>
+    <%= render :partial => "systango_hrm_employee_leaves/requests", :locals => { :leaves => @self_records } %>
+	  <p><h4><%= l(:heading_leave_detail) %></h4></p>
+      <%= render :partial => "systango_hrm_leave_reports/leave_account_details_of_user"%>
+	  <p><h4><%= l(:heading_comp_off_detail) %></h4></p>
+	  <% unless @compoffs.blank? %>
+      <%= render :partial => "systango_hrm_leave_reports/compoff_details_self"%>
+	  <%else%>
+	    <p><%= l(:label_no_record) %></p>
+	  <%end%>
+    <p>
+    	<b><%= l(:label_you_reporting) %></b>
+    	<% if @teamleads.blank? %>
+        <%= l(:label_no_record) %>
+    	<% else %>
+		    <ul>
+			    <% @teamleads.each do |teamlead| %>
+				    <li><%= teamlead.name %></li>
+			    <% end %>
+		    </ul>
+    	<% end %>
+    </p>
+    <p>
+	    <b><%= l(:label_reporting_to_you) %></b>
+	    <% if @subordinates.blank? %>
+        <%= l(:label_no_record) %>
+	    <% else %>
+		    <ul>
+			    <% @subordinates.each do |subordinate| %>
+				    <li><%= subordinate.name %></li>
+			    <% end %>
+		    </ul>
+	    <% end %>
+    </p>
+  </div>
+<% end %>
+<p class="contextual"><%= link_to_go_back  %></p>

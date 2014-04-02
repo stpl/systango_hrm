@@ -1,0 +1,17 @@
+<h4><%= l(:heading_pending)%></h4>
+<%= render :partial => "systango_hrm_employee_leaves/requests", :locals => { :leaves =>(@pending_leaves.length > 5 ? @pending_leaves[0...5] : @pending_leaves)} %>
+<p>
+  <%= link_to(l(:link_view_more), (params[:controller] == 'systango_hrm_employee_leaves' ? leaves_pending_path :  leaves_report_pending_path) ) if @pending_leaves.count > 5 %>
+</p>
+
+<h4><%= l(:heading_approved) %></h4>
+<%= render :partial => "systango_hrm_employee_leaves/requests", :locals => { :leaves =>(@approved_leaves.length > 5 ? @approved_leaves[0...5] : @approved_leaves) } %>
+<p>
+  <%= link_to(l(:link_view_more), (params[:controller] == 'systango_hrm_employee_leaves' ? leaves_approved_path :  leaves_report_approved_path)) if @approved_leaves.count > 5 %>
+</p>
+
+<h4><%= l(:heading_unapproved) %></h4>
+<%= render :partial => "systango_hrm_employee_leaves/requests", :locals => { :leaves =>(@unapproved_leaves.length > 5 ? @unapproved_leaves[0...5] : @unapproved_leaves)} %>
+<p>
+  <%= link_to(l(:link_view_more), (params[:controller] == 'systango_hrm_employee_leaves' ? leaves_unapproved_path :  leaves_report_unapproved_path)) if @unapproved_leaves.count > 5 %>
+</p>

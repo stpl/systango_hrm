@@ -1,0 +1,7 @@
+<ul>
+  <%= call_hook(:view_designations_context_menu_start, {:designations => @designations, :can => @can, :back => @back }) %>
+  <% if !@designation.nil? and @designations.size == 1 %>
+	  <li><%= context_menu_link 'Edit', edit_systango_hrm_designation_path(@designation.id),:class => 'icon-edit', :disabled => !@can[:edit] %></li>
+  <%end%>
+  <%= call_hook(:view_designations_context_menu_end, {:designations => @designations, :can => @can, :back => @back }) %>
+</ul>

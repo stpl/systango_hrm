@@ -1,0 +1,33 @@
+.left{ float:left }
+
+#main {
+    margin: 8px 24px 0;
+}
+body, #wrapper {
+    background-color: #EEEEEE;
+    font-family: "Lucida Grande",verdana,arial,helvetica,sans-serif;
+}
+
+.select_width, .select_width select { width: 170px !important;}
+
+table.list th, table.list, table.list td { white-space: normal;}
+
+#without-clearfix, #with-clearfix {
+    padding: 5px;
+}
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+.clearfix {
+    *zoom: 1;
+}
+html > body .tabular p.select_position {
+     overflow:visible;
+ } 
+ table.list tr.issue a {color: #116699;}
