@@ -1,4 +1,4 @@
-<% if User.current.login? %>
+<% if user_has_any_systango_hrm_permission? and User.current.login? %>
   <fieldset>
 		<legend>
 		  <h1> <%= l(:heading_leave)%> </h1>

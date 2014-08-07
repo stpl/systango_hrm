@@ -10,20 +10,53 @@
 
 == Uninstall
 
-rake redmine:plugins NAME=systango_hrm RAILS_ENV=production
-rm -r plugins/systango_hrm
+* rake redmine:plugins NAME=systango_hrm RAILS_ENV=production
+* rm -r plugins/systango_hrm
 
 == Requirements
 
 * Redmine 2.2.4.stable and above
 
 == Test
-rake db:drop RAILS_ENV=test
-rake db:migrate redmine:plugins:migrate RAILS_ENV=test
-rake redmine:test:plugins:functionals PLUGIN=systango_hrm RAILS_ENV=test
-rake redmine:test:plugins:units PLUGIN=systango_hrm RAILS_ENV=test
-rake redmine:test:plugins PLUGIN=systango_hrm RAILS_ENV=test
+* rake db:drop RAILS_ENV=test
+* rake db:migrate redmine:plugins:migrate RAILS_ENV=test
+* rake redmine:test:plugins:functionals PLUGIN=systango_hrm RAILS_ENV=test
+* rake redmine:test:plugins:units PLUGIN=systango_hrm RAILS_ENV=test
+* rake redmine:test:plugins PLUGIN=systango_hrm RAILS_ENV=test
+* rake db:reset  redmine:plugins:migrate test:plugins NAME=systango_hrm RAILS_ENV=test
+* rake db:drop RAILS_ENV=test && rake db:create db:migrate redmine:plugins:migrate RAILS_ENV=test && rake test:plugins PLUGIN=systango_hrm RAILS_ENV=test
 
-rake db:reset  redmine:plugins:migrate test:plugins NAME=systango_hrm RAILS_ENV=test
+== How it works
 
-rake db:drop RAILS_ENV=test && rake db:create db:migrate redmine:plugins:migrate RAILS_ENV=test && rake test:plugins PLUGIN=systango_hrm RAILS_ENV=test
+=== 1. After installation:
+
+* Create roles and give permission, go to Administration > "Roles and Permissions" where permissions are listed below under "Systango HRM" section.
+*Note:* Assignee with  "Final Leave Approval" permission, will have access to all the feature/permission listed in "Systango HRM".
+* Create a project, as roles can be assigned only on project.
+* For each user/group admin need to assign roles which can be done via following steps:
+    i. User > Select Project > Select Project Name > Select Role
+
+*Note:* "View holiday calender" is default permission for every user.
+
+=== 2. Plugin configuration options/terminology definition used in plugin:
+
+* Manage designations and leaves entitlements: Assign "Designation" and "Leaves Entitlements" per year to every user.
+
+* Manage leave accounts:  Admin can create/update leave account for each user.
+  * From here, give "Designation" and "Applicable From". 
+  * Provision for managing eligibility for Maternity leaves.
+
+*Note:*
+
+  i. Entitlement Leave is calculated via the formula: (Total entitlements leave for the designation*Number of Months)/12 (This can be used when an employee joins the office in the mid of the year)
+  ii. An employee with joining of after 15th of the month is not entitled to receive leave for that month. 
+
+* Manage leave categories: Admin can set category of the leaves like: Sick Leave, Personal Leave etc. A suggestion box for user to select one of them while applying leaves.
+
+* Manage holiday calendar: Admin can set current year holiday. If a day is set as holiday then there will be no leave deduction for that day.
+
+* Manage day in lieu/comp-offs: Admin can add/update/delete the comp-off of the user.
+
+* Manage leaves approval hierarchy: Admin can add/remove approvers of the employee.
+
+* Manage leaves: Admin/Authorized person can manage (approve/unapprove) the leaves.

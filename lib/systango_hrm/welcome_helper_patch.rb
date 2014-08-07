@@ -44,6 +44,16 @@ module SystangoHrm
       def user_permission?(permission_for)
         (User.current.allowed_to_globally?(:"#{permission_for}", {}) or User.current.allowed_to_globally?(:hr_permissions, {}))
       end
+
+      def user_has_any_systango_hrm_permission?
+        ['apply_leave', 'view_leave_report_self', 'manage_leave_request', 'view_leave_report_hr_or_tl','add_compoff_details',
+         'show_subordinate_and_its_teamlead', 'add_teamlead_subordinates_details', 'add_designation_wise_entitled_leaves',
+         'add_employee_leave_details', 'add_subject_for_leave', 'add_holiday_calendar', 'hr_permissions'].each do |permission_for|
+          return true if user_permission?(permission_for)
+        end
+        false
+      end
+
     end
   end
 end
