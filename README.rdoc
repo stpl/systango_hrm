@@ -5,8 +5,10 @@
 * Copy systango_hrm plugin to {RAILS_APP}/plugins on your redmine path
 * Run bundle install --without development test RAILS_ENV=production
 * Run rake redmine:plugins NAME=systango_hrm RAILS_ENV=production
-* Run nohup rake jobs:work &
-* Run rake task for 'send reminder email for pending leaves' and 'recalculate leaves on holiday calender update'
+* Run nohup rake jobs:work RAILS_ENV=production &
+* Run rake task for 'send reminder email for pending leaves' and 'recalculate leaves on holiday calender update' using below commands: 
+  * rake systango_hrm:send_reminder_email_for_pending_leaves
+  * rake systango_hrm:recalculate_leaves_on_holiday_calender_update
 
 == Uninstall
 
